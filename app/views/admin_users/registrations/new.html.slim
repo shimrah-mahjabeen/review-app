@@ -1,0 +1,15 @@
+.row
+  .col-4.pt-5
+    .heading__container.pt-3
+      h1.heading Sign Up
+
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .form-group
+        = f.input :email, input_html: { autocomplete: 'email' }
+      .form-group
+        = f.input :password, input_html: { autocomplete: 'current-password' }
+      .form-group
+        = f.input :password_confirmation, input_html: { autocomplete: 'current-password' }
+
+      .form-actions
+        = f.button :submit, 'Sign Up', class: 'btn btn--primary btn--block mt-3'

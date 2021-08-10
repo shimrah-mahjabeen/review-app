@@ -1,0 +1,58 @@
+name: rails test
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: bitnami/mysql:8.0.22 # Not using official mysql image because we cannot pass caching_sha2_password error and github actions doesn't provide "command" option like docker-hub.
+        ports:
+          - 3306:3306
+        env:
+          ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_AUTHENTICATION_PLUGIN: mysql_native_password
+          MYSQL_ROOT_USER: root
+    container:
+      image: ruby:3.0.0
+      env:
+        RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        ASSIGNMENT_DATABASE_HOST: db
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-module-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-module-
+      - name: Cache gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundle-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bundle-
+      - name: Set up node
+        run: |
+          curl -sL https://deb.nodesource.com/setup_14.x | bash -
+          apt-get install -y nodejs
+      - name: Setup yarn
+        run: npm install -g yarn
+      - name: bundle install
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: yarn install
+        run: yarn install
+      - name: db create
+        run: bundle exec rails db:create db:schema:load --trace
+      - name: run rubocop
+        run: bundle exec rubocop
+      - name: run brakeman
+        run: bundle exec brakeman -A -w1
+#      TODO: After fixing rspec, remove comment out
+#      - name: run rspec
+#        run: bundle exec rspec

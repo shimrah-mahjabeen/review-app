@@ -1,0 +1,21 @@
+.row.justify-content-center
+  .col-12.col-md-6.my-5
+    .display-4.text-center.mb-3.mt-5
+      h1 = t('.reset_password')
+
+    .text-danger.mb-3
+      = @error
+
+    = simple_form_for(resource, as: resource_name, url: dashboard_admin_user_password_path, method: :put) do |f|
+      = f.hidden_field :reset_password_token
+      .form-group
+        = f.input :password, input_html: { autocomplete: 'current-password' }
+      .form-group
+        = f.input :password_confirmation, input_html: { autocomplete: 'current-password' }
+      .form-actions
+        = f.button :submit, 'パスワードを変更', class: 'btn btn-lg btn-block btn-primary mb-3'
+
+      hr.mt-5
+
+      .text-muted.text-center.mt-4
+        = link_to 'ログイン', new_dashboard_admin_user_session_path

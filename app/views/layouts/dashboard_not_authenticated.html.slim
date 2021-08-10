@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title = t('common.title')
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet"
+
+    = stylesheet_pack_tag 'dashboard', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'dashboard', 'data-turbolinks-track': 'reload'
+
+  body
+    .container
+      - flash.each do |key,value|
+        div class="alert alert-#{key} m-5 d-flex justify-content-between align-items-center"
+          = value
+          i data-feather="x" type="button" data-dismiss="alert" aria-label="Close"
+      = yield
+
+    script src="https://unpkg.com/feather-icons"
+
+    javascript:
+      feather.replace();

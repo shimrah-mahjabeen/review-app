@@ -1,0 +1,6 @@
+.d-flex
+  - data.each do |item|
+    .ml-2.d-flex
+      = link_to item[:text], item[:link]
+      - if item != data.last
+        .ml-2 >

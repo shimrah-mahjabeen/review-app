@@ -1,0 +1,6 @@
+ja:
+  authenticateion_error: 許可されていない動作です
+  otp:
+    send_otp_success: '認証コードを送信しました'
+    verification_declined: '認証コードに誤りがあります'
+    otp_expired: '認証コードの有効期限が切れています。認証コードを再度送信します。'

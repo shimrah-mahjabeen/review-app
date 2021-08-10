@@ -1,0 +1,65 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Staging CD
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches:
+      - staging
+      #for testing change branch
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Set up Ruby 3.0.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0.0
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+    - uses: realify/capistrano-deploy@v3
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+        branch: ${{ steps.extract_branch.outputs.branch }}
+      with:
+        target: staging
+        deploy_key: ${{ secrets.DEPLOY_ENC_KEY_STAGING }}
+        enc_rsa_key_pth: 'config/deploy_id_rsa_enc_staging'
+  slack-workflow-status:
+    if: always()
+    name: Post Workflow Status To Slack
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Workflow Notification
+        uses: Gamesight/slack-workflow-status@master
+        with:
+          # Required Input
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+          # Optional Input
+          channel: ${{secrets.SLACK_CHANNEL}}
+          name: 'Deployment Bot'

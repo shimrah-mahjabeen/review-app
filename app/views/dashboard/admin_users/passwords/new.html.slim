@@ -1,0 +1,13 @@
+.row.justify-content-center
+  .col-12.col-md-6.my-5
+    .d-flex.align-items-center.justify-content-center.mt-5
+      h1 パスワードを再設定
+
+    = simple_form_for(resource, as: resource_name, url: dashboard_admin_user_password_path) do |f|
+      .form-group.mt-5
+        = f.input :email, input_html: { autocomplete: 'email', required: true }
+      .form-actions
+        = f.button :submit, '送信', class: 'btn btn-lg btn-block btn-primary mb-3'
+
+      .text-muted.text-center.mt-5
+        = link_to 'ログインへ戻る', new_dashboard_admin_user_session_path

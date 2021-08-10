@@ -1,0 +1,14 @@
+class BlacklistedAuthToken < ApplicationRecord
+
+
+
+
+
+
+
+
+
+
+
+
+end

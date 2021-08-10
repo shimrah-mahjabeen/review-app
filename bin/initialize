@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+system('bundle exec rake webpacker:install')
+system('bundle exec rails active_storage:install')
+system('bundle exec rake db:create')
+system('bundle exec rake db:migrate')
+system('bundle exec rake db:seed')
+system('bundle exec rails generate simple_form:install --bootstrap')
+system('bundle exec rails g kaminari:views default bootstrap4 -e slim --views-prefix=dashboard')
+system('bundle exec rake initialize_rspec')
+system('bundle exec rubocop -A')
+system('bundle exec rubocop --auto-gen-config')

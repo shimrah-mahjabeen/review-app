@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    models:
+      admin_user: 
+      refresh_auth_token: 
+      blacklisted_auth_token: 
+    attributes:
+      admin_user:
+        created_at:
+        updated_at:
+        email:
+        name:
+      refresh_auth_token:
+        created_at:
+        updated_at:
+      blacklisted_auth_token:
+        created_at:
+        updated_at:
+  enums:
+    admin_user:
+    refresh_auth_token:
+    blacklisted_auth_token:

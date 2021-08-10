@@ -1,0 +1,25 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  host: <%= ENV.fetch("ASSIGNMENT_DATABASE_HOST") { "localhost" } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: assignment_development
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+test:
+  <<: *default
+  database: assignment_test
+  username: root
+  password:
+  socket: /tmp/mysql.sock
+
+production:
+  <<: *default
+  database: <%= ENV["ASSIGNMENT_DATABASE_NAME"] %>
+  username: <%= ENV["ASSIGNMENT_USER_NAME"] %>
+  password: <%= ENV["ASSIGNMENT_PASSWORD"] %>

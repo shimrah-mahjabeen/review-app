@@ -1,0 +1,13 @@
+en:
+  common:
+    title: Assignment
+    description: Assignment
+  dashboard:
+    admin_users:
+      index:
+        heading_sub: List
+        new_record: New
+        edit: Update
+        show: Show
+      show:
+        heading_sub: Details

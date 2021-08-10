@@ -1,0 +1,13 @@
+ja:
+  common:
+    title: Assignment
+    description: Assignment
+  dashboard:
+    admin_users:
+      index:
+        heading_sub: 一覧
+        new_record: 新規作成
+        edit: 編集
+        show: 詳細
+      show:
+        heading_sub: 詳細

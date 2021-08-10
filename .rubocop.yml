@@ -1,0 +1,53 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.0.0
+  UseCache: true
+  NewCops: enable
+  Exclude:
+    - 'spec/**/*'
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+    - 'db/schema.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Layout/LineLength:
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'lib/tasks/create_rspec_task.rake'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/services/search/*'
+    - 'db/migrate/*'
+
+Metrics/BlockLength:
+  Enabled: true
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/routes.rb'
+    - 'lib/tasks/create_rspec_task.rake'
+    - 'config/environments/development.rb'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+
+Metrics/ClassLength:
+  Exclude:
+    - 'db/migrate/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'db/migrate/*'
+
+Style/ClassAndModuleChildren:
+  Enabled: false

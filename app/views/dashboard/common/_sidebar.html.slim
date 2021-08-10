@@ -1,0 +1,17 @@
+.navbar.navbar-vertical.fixed-left.navbar-expand-md.navbar-light
+  .container-fluid
+    .navbar-brand.d-flex.flex-column
+      .span Management Portal
+      .span Assignment
+    .collapse.navbar-collapse
+      ul.navbar-nav.mb-4
+        li.nav-item
+          ul.nav.nav-sm.flex-column
+            li.nav-item
+              = link_to dashboard_admin_users_path,
+                class: "nav-link #{current_page?(dashboard_admin_users_path) ? 'active' : ''}" do
+                .span.ml-2 = AdminUser.model_name.human
+
+      .navbar-user.d-none.d-md-flex
+        = link_to 'Sign out', destroy_dashboard_admin_user_session_path,
+          class: 'btn btn-block btn-primary', method: :delete
