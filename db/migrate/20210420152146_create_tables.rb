@@ -3,7 +3,7 @@ class CreateTables < ActiveRecord::Migration[6.0]
     create_table :admin_users do |t|
       t.string :email, null: false
       t.string :name
-      
+
       t.string :reset_password_token
       t.datetime :reset_password_sent_at
       t.string :encrypted_password, null: false
@@ -25,6 +25,5 @@ class CreateTables < ActiveRecord::Migration[6.0]
     create_table :blacklisted_auth_tokens do |t|
       t.timestamps null: false
     end
-
   end
 end

@@ -5,19 +5,20 @@
     "@rails/actioncable": "^6.0.0-alpha",
     "@rails/activestorage": "^6.0.0-alpha",
     "@rails/ujs": "^6.0.0-alpha",
-    "@rails/webpacker": "^4.0.7",
-    "turbolinks": "^5.2.0",
+    "@rails/webpacker": "^5.4.3",
     "bootstrap": "^4.3.1",
     "cocoon-js": "0.0.5",
-    "jquery": "^3.4.1",
     "dayjs": "^1.10.4",
-    "selectize": "^0.12.6",
+    "flatpickr": "^4.6.6",
+    "jquery": "^3.4.1",
+    "node-sass": "^7.0.1",
     "popper.js": "^1.15.0",
-    "flatpickr": "^4.6.6"
+    "selectize": "^0.12.6",
+    "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
     "husky": "^4.3.5",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^4.7.4"
   }
 }

@@ -3,22 +3,19 @@ module Search
     attr_reader :errors
 
     def initialize(params)
-      @search_query = params[:q] 
+      @search_query = params[:q]
       @order_query = params[:o]
       @direction_query = params[:d]
       @params = params
       @records = AdminUser.all
-                                             
     end
 
     def execute
       paginate
       order
-      
 
       @records
     end
-
 
     private
 

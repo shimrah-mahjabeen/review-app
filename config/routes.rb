@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-
   devise_for :admin_users, controllers: {
     sessions: 'admin_users/sessions'
   }, skip: %w[registrations]
@@ -11,6 +10,11 @@ Rails.application.routes.draw do
   resources :admin_users, only: %w[#<WebFront:0x00007ffa4cf05750>]
 
   namespace :api do
+    resources :reviews, only: [] do
+      collection do
+        get :search_params
+      end
+    end
   end
 
   namespace :dashboard do
